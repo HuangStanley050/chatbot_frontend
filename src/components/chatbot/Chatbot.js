@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 class ChatBot extends Component {
   componentDidMount() {
-    this.props.sendEnquiry();
+    this.props.sendEnquiry({ text: "Where is Snoopy?" });
   }
 
   render() {
@@ -39,7 +39,7 @@ class ChatBot extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendEnquiry: () => dispatch(start_text_query())
+    sendEnquiry: query => dispatch(start_text_query(query))
   };
 };
 

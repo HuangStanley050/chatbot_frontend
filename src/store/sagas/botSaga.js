@@ -1,8 +1,15 @@
 import { takeEvery, put } from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
+import axios from "axios";
+import API from "../../API/apiCalls";
 
 function* botWorkerSaga(action) {
-  yield console.log(action);
+  try {
+    let result = yield axios.post(API.text, action.query);
+    console.log(result);
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 function* botWatcherSaga() {
