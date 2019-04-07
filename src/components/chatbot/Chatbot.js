@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from "reactstrap";
+import { InputGroup, Input } from "reactstrap";
 import {
   start_event_query,
   start_text_query
 } from "../../store/actions/botActions";
 import { record_user_msg } from "../../store/actions/userActions";
 import { connect } from "react-redux";
+import Messages from "./Messages";
 
 class ChatBot extends Component {
   // componentDidMount() {
@@ -44,7 +45,11 @@ class ChatBot extends Component {
           style={{ height: "100%", width: "100%", overflow: "auto" }}
         >
           <h2>ChatBot</h2>
-          <form onSubmit={this.submitHandler}>
+          <Messages />
+          <form
+            style={{ position: "absolute", bottom: "0", width: "100%" }}
+            onSubmit={this.submitHandler}
+          >
             <InputGroup>
               <Input
                 value={this.state.userInput}
