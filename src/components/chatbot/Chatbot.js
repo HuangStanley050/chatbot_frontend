@@ -4,12 +4,28 @@ import {
   start_event_query,
   start_text_query
 } from "../../store/actions/botActions";
+import { record_user_msg } from "../../store/actions/userActions";
 import { connect } from "react-redux";
 
 class ChatBot extends Component {
-  componentDidMount() {
-    this.props.sendEnquiry({ text: "Where is Snoopy?" });
-  }
+  // componentDidMount() {
+  //   this.props.sendEnquiry({ text: "Where is Snoopy?" });
+  // }
+  state = {
+    userInput: ""
+  };
+
+  inputHandler = e => {
+    this.setState({ userInput: e.target.value });
+  };
+
+  submitHandler = e => {
+    e.preventDefault();
+    //alert("submitted!!");
+    this.props.recordMsg(this.state.userInput);
+    this.props.sendEnquiry({ text: this.state.userInput });
+    this.setState({ userInput: "" });
+  };
 
   render() {
     const chatBotStyle = {
@@ -28,9 +44,15 @@ class ChatBot extends Component {
           style={{ height: "100%", width: "100%", overflow: "auto" }}
         >
           <h2>ChatBot</h2>
-          <InputGroup>
-            <Input placeholder="username" />
-          </InputGroup>
+          <form onSubmit={this.submitHandler}>
+            <InputGroup>
+              <Input
+                value={this.state.userInput}
+                onChange={this.inputHandler}
+                placeholder="Enter your enquiry"
+              />
+            </InputGroup>
+          </form>
         </div>
       </div>
     );
@@ -39,7 +61,8 @@ class ChatBot extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendEnquiry: query => dispatch(start_text_query(query))
+    sendEnquiry: query => dispatch(start_text_query(query)),
+    recordMsg: msg => dispatch(record_user_msg(msg))
   };
 };
 

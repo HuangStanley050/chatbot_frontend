@@ -6,7 +6,7 @@ import API from "../../API/apiCalls";
 function* botWorkerSaga(action) {
   try {
     let result = yield axios.post(API.text, action.query);
-    console.log(result);
+    console.log(result.data.fulfillmentMessages);
   } catch (e) {
     console.log(e);
   }
