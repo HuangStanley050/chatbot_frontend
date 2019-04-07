@@ -1,21 +1,29 @@
 import * as actionType from "../actions/actionTypes";
 
 const initialState = {
-  botMessages: [],
-  userMessages: []
+  //whospeaks: "",
+  messages: []
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.START_EVENT_QUERY_SUCCESS:
+      return {
+        ...state,
+        whospeaks: "AI",
+        messages: [...state.messages, ...action.msg]
+      };
     case actionType.STORE_USER_MESSAGE:
       return {
         ...state,
-        userMessages: [...state.userMessages, action.msg]
+        whospeaks: "user",
+        messages: [...state.messages, action.msg]
       };
     case actionType.START_TEXT_QUERY_SUCCESS:
       return {
         ...state,
-        botMessages: [...state.botMessages, ...action.msg]
+        whospeaks: "AI",
+        messages: [...state.messages, ...action.msg]
       };
     default:
       return state;

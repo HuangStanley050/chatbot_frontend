@@ -9,9 +9,10 @@ import { connect } from "react-redux";
 import Messages from "./Messages";
 
 class ChatBot extends Component {
-  // componentDidMount() {
-  //   this.props.sendEnquiry({ text: "Where is Snoopy?" });
-  // }
+  componentDidMount() {
+    this.props.sendEvent({ event: "Welcome" });
+  }
+
   state = {
     userInput: ""
   };
@@ -23,7 +24,7 @@ class ChatBot extends Component {
   submitHandler = e => {
     e.preventDefault();
     //alert("submitted!!");
-    this.props.recordMsg(this.state.userInput);
+    this.props.recordMsg({ text: { text: this.state.userInput }, who: "user" });
     this.props.sendEnquiry({ text: this.state.userInput });
     this.setState({ userInput: "" });
   };
@@ -67,6 +68,7 @@ class ChatBot extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     sendEnquiry: query => dispatch(start_text_query(query)),
+    sendEvent: eventquery => dispatch(start_event_query(eventquery)),
     recordMsg: msg => dispatch(record_user_msg(msg))
   };
 };
