@@ -19,6 +19,7 @@ const Dialog = props => {
     <React.Fragment>
       {props.speaks === "user" ? user : AI}
       <br />
+      <br />
     </React.Fragment>
   );
 };

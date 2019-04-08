@@ -8,9 +8,16 @@ import { record_user_msg } from "../../store/actions/userActions";
 import { connect } from "react-redux";
 import Messages from "./Messages";
 
+//style={{ position: "absolute", bottom: "0", width: "100%" }}
+
 class ChatBot extends Component {
   componentDidMount() {
     this.props.sendEvent({ event: "Welcome" });
+    //this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidUpdate() {
+    this.messagesEnd.scrollIntoView();
   }
 
   state = {
@@ -47,10 +54,13 @@ class ChatBot extends Component {
         >
           <h2>ChatBot</h2>
           <Messages />
-          <form
-            style={{ position: "absolute", bottom: "0", width: "100%" }}
-            onSubmit={this.submitHandler}
-          >
+          <div
+            style={{ float: "left", clear: "both" }}
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          />
+          <form onSubmit={this.submitHandler}>
             <InputGroup>
               <Input
                 value={this.state.userInput}
