@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 import Messages from "./Messages";
 
 //style={{ position: "absolute", bottom: "0", width: "100%" }}
-
 class ChatBot extends Component {
   componentDidMount() {
     this.props.sendEvent({ event: "Welcome" });
@@ -53,9 +52,9 @@ class ChatBot extends Component {
           style={{ height: "100%", width: "100%", overflow: "auto" }}
         >
           <h2>ChatBot</h2>
-          <Messages />
+          <Messages messages={this.props.messages} />
           <div
-            style={{ float: "left", clear: "both" }}
+            //style={{ float: "left", clear: "both" }}
             ref={el => {
               this.messagesEnd = el;
             }}
@@ -83,7 +82,13 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return {
+    messages: state.bot.messages
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ChatBot);
