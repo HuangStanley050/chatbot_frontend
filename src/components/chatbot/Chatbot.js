@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { InputGroup, Input } from "reactstrap";
+import Cookies from "universal-cookie";
 import {
   start_event_query,
   start_text_query
@@ -9,14 +10,15 @@ import { connect } from "react-redux";
 import Messages from "./Messages";
 
 //style={{ position: "absolute", bottom: "0", width: "100%" }}
+
+const cookies = new Cookies();
 class ChatBot extends Component {
   componentDidMount() {
-    this.props.sendEvent({ event: "Welcome" });
-    //this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    this.props.sendEvent({ event: "Welcome", userID: cookies.get("userID") });
   }
 
   componentDidUpdate() {
-    this.messagesEnd.scrollIntoView();
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   }
 
   state = {
@@ -31,7 +33,10 @@ class ChatBot extends Component {
     e.preventDefault();
     //alert("submitted!!");
     this.props.recordMsg({ text: { text: this.state.userInput }, who: "user" });
-    this.props.sendEnquiry({ text: this.state.userInput });
+    this.props.sendEnquiry({
+      text: this.state.userInput,
+      userID: cookies.get("userID")
+    });
     this.setState({ userInput: "" });
   };
 
