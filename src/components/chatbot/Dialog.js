@@ -3,13 +3,29 @@ import { InputGroup, InputGroupAddon, Input } from "reactstrap";
 import CardInfo from "./CardInfo";
 
 const Dialog = props => {
-  // const {
-  //   header,
-  //   description,
-  //   price,
-  //   link,
-  //   image
-  // } = props.card.structValue.fields;
+  let Cards;
+
+  if (props.card) {
+    Cards = (
+      <div
+        style={{
+          overflow: "auto",
+
+          overflowX: "scroll",
+          width: "100%"
+        }}
+      >
+        <div style={{ display: "flex" }}>
+          {props.card.map((info, i) => (
+            <CardInfo info={info} key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  } else {
+    Cards = null;
+  }
+
   const user = (
     <InputGroup>
       <InputGroupAddon addonType="prepend">
@@ -32,16 +48,10 @@ const Dialog = props => {
           </InputGroupAddon>
         </React.Fragment>
       ) : (
-        <CardInfo {...props.card[0].structValue.fields} />
+        Cards
       )}
     </InputGroup>
   );
-
-  //const CardResponse = <CardInfo />;
-
-  // if (props.card) {
-  //   console.log(props.card[0].structValue.fields.header.stringValue);
-  // }
 
   return (
     <React.Fragment>

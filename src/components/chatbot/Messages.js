@@ -10,11 +10,7 @@ const Messages = props => {
           <Dialog
             speaks={message.hasOwnProperty("who") ? "user" : "AI"}
             key={index}
-            text={
-              message.hasOwnProperty("payload")
-                ? "this is card response"
-                : message.text.text
-            }
+            text={message.hasOwnProperty("payload") ? null : message.text.text}
             card={
               message.hasOwnProperty("payload")
                 ? message.payload.fields.cards.listValue.values

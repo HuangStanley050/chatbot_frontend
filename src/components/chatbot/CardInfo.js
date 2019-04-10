@@ -5,28 +5,32 @@ import {
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
   Button
 } from "reactstrap";
 
 const CardInfo = props => {
-  console.log(props);
+  //console.log(props.info.structValue.fields);
   return (
     <div>
-      <Card>
+      <Card
+        body
+        style={{ display: "inline-block", width: "300px" }}
+        inverse
+        color="primary"
+      >
         <CardImg
-          style={{height:'200px'}}
           top
-          width="100%"
+          style={{ width: "200px", height: "200px" }}
           src="http://placehold.jp/150x150.png"
           alt="Card image cap"
         />
         <CardBody>
-          <CardTitle>{props.header.stringValue}</CardTitle>
-          <CardSubtitle>{props.description.stringValue}</CardSubtitle>
+          <CardTitle>
+            {props.info.structValue.fields.header.stringValue}
+          </CardTitle>
+
           <CardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            {props.info.structValue.fields.description.stringValue}
           </CardText>
           <Button>Button</Button>
         </CardBody>
