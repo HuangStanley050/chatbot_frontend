@@ -1,5 +1,5 @@
 import React from "react";
-import { InputGroup, InputGroupAddon, Input } from "reactstrap";
+import { InputGroup, InputGroupAddon, Input, CardDeck } from "reactstrap";
 import CardInfo from "./CardInfo";
 
 const Dialog = props => {

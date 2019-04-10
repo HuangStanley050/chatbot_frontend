@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { InputGroup, Input } from "reactstrap";
+import { InputGroup, Input, Navbar, NavbarBrand } from "reactstrap";
 import Cookies from "universal-cookie";
 import {
   start_event_query,
@@ -43,8 +43,8 @@ class ChatBot extends Component {
   render() {
     const chatBotStyle = {
       position: "fixed",
-      top: "4rem",
       right: "0",
+      bottom: "0",
       height: "400px",
       width: "400px",
       border: "5px solid red",
@@ -54,9 +54,15 @@ class ChatBot extends Component {
       <div style={chatBotStyle}>
         <div
           id="chatbot"
-          style={{ height: "100%", width: "100%", overflow: "auto" }}
+          style={{
+            height: "100%",
+            width: "100%",
+            overflow: "auto"
+          }}
         >
-          <h2>ChatBot</h2>
+          <Navbar style={{ backgroundColor: "red" }}>
+            <NavbarBrand>ChatBot</NavbarBrand>
+          </Navbar>
           <Messages messages={this.props.messages} />
           <div
             //style={{ float: "left", clear: "both" }}
