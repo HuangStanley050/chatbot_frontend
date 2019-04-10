@@ -8,6 +8,10 @@ function* botQueryWorkerSaga(action) {
   try {
     let result = yield axios.post(API.text, action.query);
     let messages = result.data.fulfillmentMessages;
+    // if (messages.length === 2) {
+    //   messages = messages[0];
+    // }
+    // console.log(messages);
     yield put(text_query_success(messages));
   } catch (e) {
     console.log(e);
