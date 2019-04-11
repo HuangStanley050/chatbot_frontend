@@ -12,8 +12,14 @@ const Messages = props => {
             key={index}
             text={message.hasOwnProperty("payload") ? null : message.text.text}
             card={
-              message.hasOwnProperty("payload")
+              message.hasOwnProperty("payload") && message.payload.fields.cards
                 ? message.payload.fields.cards.listValue.values
+                : null
+            }
+            quickReply={
+              message.hasOwnProperty("payload") &&
+              message.payload.fields.quick_replies
+                ? message.payload.fields
                 : null
             }
           />
