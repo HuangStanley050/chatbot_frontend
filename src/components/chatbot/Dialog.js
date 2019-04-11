@@ -1,5 +1,5 @@
 import React from "react";
-import { InputGroup, InputGroupAddon, Input, CardDeck } from "reactstrap";
+import { InputGroup, InputGroupAddon, Input } from "reactstrap";
 import CardInfo from "./CardInfo";
 import QuickReplies from "./QuickReplies";
 

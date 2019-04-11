@@ -5,13 +5,11 @@ import API from "../../API/apiCalls";
 import { text_query_success, event_query_success } from "../actions/botActions";
 
 function* botQueryWorkerSaga(action) {
+  //console.log(action);
   try {
     let result = yield axios.post(API.text, action.query);
     let messages = result.data.fulfillmentMessages;
-    // if (messages.length === 2) {
-    //   messages = messages[0];
-    // }
-    // console.log(messages);
+
     yield put(text_query_success(messages));
   } catch (e) {
     console.log(e);
