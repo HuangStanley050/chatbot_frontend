@@ -1,15 +1,13 @@
 import React from "react";
 import { InputGroup, InputGroupAddon, Input, CardDeck } from "reactstrap";
 import CardInfo from "./CardInfo";
-import QuickReply from "./QuickReply";
 
 const Dialog = props => {
-  let Cards = null;
+  let Response;
 
-  const botResponse = props => {
-    //console.log(props);
+  const botReply = props => {
     if (props.card) {
-      Cards = (
+      Response = (
         <div
           style={{
             overflow: "auto",
@@ -25,35 +23,22 @@ const Dialog = props => {
           </div>
         </div>
       );
-      return Cards;
-    }
-    if (props.quickReply) {
-      console.log("quick reply");
+    } else if (props.quickReply) {
+      Response = <h4>This is quick Reply</h4>;
     } else {
-      console.log("text reply");
+      Response = (
+        <React.Fragment>
+          <Input disabled={true} value={props.text} />
+          <InputGroupAddon addonType="append">
+            <span className="input-group-text">
+              <i className="fas fa-robot" />
+            </span>
+          </InputGroupAddon>
+        </React.Fragment>
+      );
     }
+    return Response;
   };
-
-  if (props.card) {
-    Cards = (
-      <div
-        style={{
-          overflow: "auto",
-
-          overflowX: "scroll",
-          width: "100%"
-        }}
-      >
-        <div style={{ display: "flex" }}>
-          {props.card.map((info, i) => (
-            <CardInfo info={info} key={i} />
-          ))}
-        </div>
-      </div>
-    );
-  } else {
-    Cards = null;
-  }
 
   const user = (
     <InputGroup>
@@ -65,23 +50,9 @@ const Dialog = props => {
       <Input disabled={true} value={props.text} />
     </InputGroup>
   );
-  const AI = (
-    <InputGroup>
-      {!props.card ? (
-        <React.Fragment>
-          <Input disabled={true} value={props.text} />
-          <InputGroupAddon addonType="append">
-            <span className="input-group-text">
-              <i className="fas fa-robot" />
-            </span>
-          </InputGroupAddon>
-        </React.Fragment>
-      ) : (
-        Cards
-      )}
-    </InputGroup>
-  );
-  botResponse(props);
+
+  const AI = <InputGroup>{botReply(props)}</InputGroup>;
+
   return (
     <React.Fragment>
       {props.speaks === "user" ? user : AI}
