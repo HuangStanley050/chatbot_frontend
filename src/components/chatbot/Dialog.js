@@ -1,6 +1,7 @@
 import React from "react";
 import { InputGroup, InputGroupAddon, Input, CardDeck } from "reactstrap";
 import CardInfo from "./CardInfo";
+import QuickReplies from "./QuickReplies";
 
 const Dialog = props => {
   let Response;
@@ -24,7 +25,7 @@ const Dialog = props => {
         </div>
       );
     } else if (props.quickReply) {
-      Response = <h4>This is quick Reply</h4>;
+      Response = <QuickReplies quick={props.quickReply} />;
     } else {
       Response = (
         <React.Fragment>
