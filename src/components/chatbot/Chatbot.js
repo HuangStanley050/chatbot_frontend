@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { InputGroup, Input, Navbar, NavbarBrand } from "reactstrap";
+import {
+  InputGroup,
+  Input,
+  Navbar,
+  NavbarBrand,
+  NavItem,
+  Nav,
+  Button,
+  ButtonGroup
+} from "reactstrap";
 import Cookies from "universal-cookie";
 import {
   start_event_query,
@@ -23,7 +32,8 @@ class ChatBot extends Component {
   }
 
   state = {
-    userInput: ""
+    userInput: "",
+    showBot: true
   };
 
   inputHandler = e => {
@@ -39,6 +49,10 @@ class ChatBot extends Component {
       userID: cookies.get("userID")
     });
     this.setState({ userInput: "" });
+  };
+
+  showBotHander = e => {
+    this.setState({ showBot: !this.state.showBot });
   };
 
   render() {
@@ -71,6 +85,24 @@ class ChatBot extends Component {
             }}
           >
             <NavbarBrand>ChatBot</NavbarBrand>
+            <Nav navbar>
+              <ButtonGroup>
+                <Button
+                  disabled={!this.state.showBot ? true : false}
+                  onClick={this.showBotHander}
+                  color="danger"
+                >
+                  close
+                </Button>
+                <Button
+                  disabled={this.state.showBot ? true : false}
+                  onClick={this.showBotHander}
+                  color="primary"
+                >
+                  open
+                </Button>
+              </ButtonGroup>
+            </Nav>
           </Navbar>
           <Messages messages={this.props.messages} />
           <div
