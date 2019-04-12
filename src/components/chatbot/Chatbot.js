@@ -12,6 +12,7 @@ import Messages from "./Messages";
 //style={{ position: "absolute", bottom: "0", width: "100%" }}
 
 const cookies = new Cookies();
+
 class ChatBot extends Component {
   componentDidMount() {
     this.props.sendEvent({ event: "Welcome", userID: cookies.get("userID") });
@@ -60,7 +61,15 @@ class ChatBot extends Component {
             overflow: "auto"
           }}
         >
-          <Navbar style={{ backgroundColor: "red" }}>
+          <Navbar
+            style={{
+              backgroundColor: "red",
+              position: "absolute",
+              top: "0",
+              width: "100%",
+              zIndex: "200"
+            }}
+          >
             <NavbarBrand>ChatBot</NavbarBrand>
           </Navbar>
           <Messages messages={this.props.messages} />

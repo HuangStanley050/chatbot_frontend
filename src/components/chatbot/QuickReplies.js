@@ -14,14 +14,14 @@ const QuickReplies = props => {
     //console.log(payload);
     if (response === "more info") {
       return;
-    }
-    if (payload === "training_masterclass") {
+    } else if (payload === "training_masterclass") {
       props.sendEventReply({
         event: "MASTERCLASS",
         userID: cookies.get("userID")
       });
+    } else {
+      props.sendQuickReply({ text: response, userID: cookies.get("userID") });
     }
-    props.sendQuickReply({ text: response, userID: cookies.get("userID") });
   };
 
   const response = (

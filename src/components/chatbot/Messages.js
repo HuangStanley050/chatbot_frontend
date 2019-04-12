@@ -4,7 +4,7 @@ import Dialog from "./Dialog";
 
 const Messages = props => {
   return (
-    <div>
+    <div style={{ marginTop: "4rem" }}>
       {props.messages.map((message, index) => {
         return (
           <Dialog
