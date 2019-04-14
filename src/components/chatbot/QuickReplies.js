@@ -11,13 +11,18 @@ const QuickReplies = props => {
   //console.log(props.quick);
 
   const handleClick = (response, payload) => {
-    //console.log(payload);
+    console.log(payload);
     if (response === "more info") {
       return;
     } else if (payload === "training_masterclass") {
       props.sendEventReply({
         event: "MASTERCLASS",
         userID: cookies.get("userID")
+      });
+    } else if (payload === "recommend_yes") {
+      props.sendEventReply({
+        event: "SHOW_RECOMMENDATIONS",
+        userID: cookies.get("userId")
       });
     } else {
       props.sendQuickReply({ text: response, userID: cookies.get("userID") });

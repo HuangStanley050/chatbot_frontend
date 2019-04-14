@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import {
   InputGroup,
   Input,
@@ -25,6 +26,27 @@ const cookies = new Cookies();
 class ChatBot extends Component {
   componentDidMount() {
     this.props.sendEvent({ event: "Welcome", userID: cookies.get("userID") });
+    if (window.location.pathname === "/shop" && !this.state.shopWelcomeSent) {
+      //console.log(window.location.pathname);
+      this.props.sendEvent({
+        event: "WELCOME_SHOP",
+        userID: cookies.get("userID")
+      });
+      this.setState({ shopWelcomeSent: true });
+    }
+    this.props.history.listen(() => {
+      //console.log("listening")
+      if (
+        this.props.history.location.pathname === "/shop" &&
+        !this.state.shopWelcomeSent
+      ) {
+        this.props.sendEvent({
+          event: "WELCOME_SHOP",
+          userID: cookies.get("userID")
+        });
+        this.setState({ shopWelcomeSent: true });
+      }
+    });
   }
 
   componentDidUpdate() {
@@ -33,7 +55,8 @@ class ChatBot extends Component {
 
   state = {
     userInput: "",
-    showBot: true
+    showBot: true,
+    shopWelcomeSent: false
   };
 
   inputHandler = e => {
@@ -143,7 +166,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChatBot);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ChatBot)
+);
