@@ -1,6 +1,4 @@
 export default {
-  text:
-    "https://webdevpractice-infamousgodhand.c9users.io:8081/api/df_text_query",
-  event:
-    "https://webdevpractice-infamousgodhand.c9users.io:8081/api/df_event_query"
+  text: "http://localhost:8080/api/df_text_query",
+  event: "http://localhost:8080/api/df_event_query"
 };

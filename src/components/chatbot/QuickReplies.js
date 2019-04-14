@@ -11,8 +11,10 @@ const QuickReplies = props => {
   //console.log(props.quick);
 
   const handleClick = (response, payload) => {
-    console.log(payload);
+    //console.log(response);
     if (response === "more info") {
+      //console.log(payload);
+      window.open("http://" + payload, "_blank");
       return;
     } else if (payload === "training_masterclass") {
       props.sendEventReply({
@@ -35,17 +37,13 @@ const QuickReplies = props => {
         <CardTitle>{props.quick.text.stringValue}</CardTitle>
 
         <div style={{ display: "flex", justifyContent: "space-around" }}>
-          {props.quick.quick_replies.listValue.values.map((msg, i) => (
-            <a
-              key={i}
-              target="_blank"
-              href={
-                msg.structValue.fields.link
-                  ? "http://" + msg.structValue.fields.link.stringValue
-                  : null
-              }
-            >
+          {props.quick.quick_replies.listValue.values.map((msg, i) => {
+            // if (msg.structValue.fields.link) {
+            //   console.log(msg.structValue.fields.link.stringValue);
+            // }
+            return (
               <Button
+                key={i}
                 onClick={() =>
                   handleClick(
                     msg.structValue.fields.text.stringValue,
@@ -55,8 +53,8 @@ const QuickReplies = props => {
               >
                 {msg.structValue.fields.text.stringValue}
               </Button>
-            </a>
-          ))}
+            );
+          })}
         </div>
       </Card>
     </div>

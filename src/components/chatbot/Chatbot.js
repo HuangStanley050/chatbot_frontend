@@ -1,11 +1,10 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import React, {Component} from "react";
+import {withRouter} from "react-router-dom";
 import {
   InputGroup,
   Input,
   Navbar,
   NavbarBrand,
-  NavItem,
   Nav,
   Button,
   ButtonGroup
@@ -15,8 +14,8 @@ import {
   start_event_query,
   start_text_query
 } from "../../store/actions/botActions";
-import { record_user_msg } from "../../store/actions/userActions";
-import { connect } from "react-redux";
+import {record_user_msg} from "../../store/actions/userActions";
+import {connect} from "react-redux";
 import Messages from "./Messages";
 
 //style={{ position: "absolute", bottom: "0", width: "100%" }}
@@ -25,14 +24,14 @@ const cookies = new Cookies();
 
 class ChatBot extends Component {
   componentDidMount() {
-    this.props.sendEvent({ event: "Welcome", userID: cookies.get("userID") });
+    this.props.sendEvent({event: "Welcome", userID: cookies.get("userID")});
     if (window.location.pathname === "/shop" && !this.state.shopWelcomeSent) {
       //console.log(window.location.pathname);
       this.props.sendEvent({
         event: "WELCOME_SHOP",
         userID: cookies.get("userID")
       });
-      this.setState({ shopWelcomeSent: true });
+      this.setState({shopWelcomeSent: true});
     }
     this.props.history.listen(() => {
       //console.log("listening")
@@ -44,13 +43,13 @@ class ChatBot extends Component {
           event: "WELCOME_SHOP",
           userID: cookies.get("userID")
         });
-        this.setState({ shopWelcomeSent: true });
+        this.setState({shopWelcomeSent: true});
       }
     });
   }
 
   componentDidUpdate() {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    this.messagesEnd.scrollIntoView({behavior: "smooth"});
   }
 
   state = {
@@ -60,22 +59,22 @@ class ChatBot extends Component {
   };
 
   inputHandler = e => {
-    this.setState({ userInput: e.target.value });
+    this.setState({userInput: e.target.value});
   };
 
   submitHandler = e => {
     e.preventDefault();
     //alert("submitted!!");
-    this.props.recordMsg({ text: { text: this.state.userInput }, who: "user" });
+    this.props.recordMsg({text: {text: this.state.userInput}, who: "user"});
     this.props.sendEnquiry({
       text: this.state.userInput,
       userID: cookies.get("userID")
     });
-    this.setState({ userInput: "" });
+    this.setState({userInput: ""});
   };
 
   showBotHander = e => {
-    this.setState({ showBot: !this.state.showBot });
+    this.setState({showBot: !this.state.showBot});
   };
 
   render() {
