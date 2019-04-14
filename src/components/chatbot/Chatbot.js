@@ -56,13 +56,16 @@ class ChatBot extends Component {
   };
 
   render() {
+    const openBot = "400px";
+    const closeBot = "50px";
+    const botStatus = this.state.showBot ? openBot : closeBot;
     const chatBotStyle = {
       position: "fixed",
       right: "0",
       bottom: "0",
-      height: "400px",
+      height: botStatus,
       width: "400px",
-      border: "5px solid red",
+      //border: "5px solid red",
       backgroundColor: "white"
     };
     return (
@@ -77,7 +80,7 @@ class ChatBot extends Component {
         >
           <Navbar
             style={{
-              backgroundColor: "red",
+              backgroundColor: "gray",
               position: "absolute",
               top: "0",
               width: "100%",
