@@ -1,5 +1,13 @@
 import React from "react";
-import { InputGroup, InputGroupAddon, Input } from "reactstrap";
+import {
+  InputGroup,
+  InputGroupAddon,
+  Input,
+  Card,
+  CardTitle,
+  CardText,
+  CardBody
+} from "reactstrap";
 import CardInfo from "./CardInfo";
 import QuickReplies from "./QuickReplies";
 
@@ -17,7 +25,7 @@ const Dialog = props => {
             width: "100%"
           }}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{display: "flex"}}>
             {props.card.map((info, i) => (
               <CardInfo info={info} key={i} />
             ))}
@@ -28,28 +36,38 @@ const Dialog = props => {
       Response = <QuickReplies quick={props.quickReply} />;
     } else {
       Response = (
-        <React.Fragment>
-          <Input disabled={true} value={props.text} />
-          <InputGroupAddon addonType="append">
-            <span className="input-group-text">
-              <i className="fas fa-robot" />
-            </span>
-          </InputGroupAddon>
-        </React.Fragment>
+        <div style={{width: "100%"}}>
+          <Card body inverse color="primary">
+            <CardBody>
+              <CardTitle>
+                <span style={{backgroundColor: "white", color: "black"}}>
+                  <i className="fas fa-robot" />
+                  Bot
+                </span>
+              </CardTitle>
+              <CardText>{props.text}</CardText>
+            </CardBody>
+          </Card>
+        </div>
       );
     }
     return Response;
   };
 
   const user = (
-    <InputGroup>
-      <InputGroupAddon addonType="prepend">
-        <span className="input-group-text">
-          <i className="fas fa-user" />
-        </span>
-      </InputGroupAddon>
-      <Input disabled={true} value={props.text} />
-    </InputGroup>
+    <div style={{width: "100%"}}>
+      <Card body inverse color="danger">
+        <CardBody>
+          <CardTitle>
+            <span style={{backgroundColor: "white", color: "blue"}}>
+              <i className="fas fa-user" />
+              You
+            </span>
+          </CardTitle>
+          <CardText>{props.text}</CardText>
+        </CardBody>
+      </Card>
+    </div>
   );
 
   const AI = <InputGroup>{botReply(props)}</InputGroup>;
