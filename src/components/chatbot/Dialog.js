@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  InputGroup,
-  InputGroupAddon,
-  Input,
-  Card,
-  CardTitle,
-  CardText,
-  CardBody
-} from "reactstrap";
+import {Card, CardTitle, CardText, CardBody} from "reactstrap";
 import CardInfo from "./CardInfo";
 import QuickReplies from "./QuickReplies";
 
@@ -40,7 +32,7 @@ const Dialog = props => {
           <Card body inverse color="primary">
             <CardBody>
               <CardTitle>
-                <span style={{backgroundColor: "white", color: "black"}}>
+                <span style={{color: "red"}}>
                   <i className="fas fa-robot" />
                   Bot
                 </span>
@@ -59,7 +51,7 @@ const Dialog = props => {
       <Card body inverse color="danger">
         <CardBody>
           <CardTitle>
-            <span style={{backgroundColor: "white", color: "blue"}}>
+            <span style={{color: "blue"}}>
               <i className="fas fa-user" />
               You
             </span>
@@ -70,7 +62,7 @@ const Dialog = props => {
     </div>
   );
 
-  const AI = <InputGroup>{botReply(props)}</InputGroup>;
+  const AI = <div>{botReply(props)}</div>;
 
   return (
     <React.Fragment>
